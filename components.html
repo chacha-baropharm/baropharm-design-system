@@ -14,10 +14,91 @@
       <section id="components" class="panel">
         <header><h2>Components</h2><p>모바일 UI 컴포넌트</p></header>
         <div class="components-grid">
+
+          <div class="component-card">
+            <div class="c-title">Badge</div>
+            <div class="c-desc">알림 카운트 표시. 두 자리 초과 시에만 + 아이콘 노출. 컬러는 Colors/red/6 (#f5222d).</div>
+            <div class="variant-row">
+              <span class="var-tag">Dot</span>
+              <div class="variant-stage"><span class="badge badge-dot" aria-label="dot"></span></div>
+            </div>
+            <div class="variant-row">
+              <span class="var-tag">Unit1</span>
+              <div class="variant-stage">
+                <span class="badge badge-unit1">3</span>
+                <span class="badge badge-unit1">9</span>
+              </div>
+            </div>
+            <div class="variant-row">
+              <span class="var-tag">Unit10+</span>
+              <div class="variant-stage">
+                <span class="badge badge-unit10">12</span>
+                <span class="badge badge-unit10">99<span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-card">
+            <div class="c-title">Breadcrumb</div>
+            <div class="c-desc">현재 위치 경로 표시. 2/3/4 단계 변형. Chevron Right로 구분.</div>
+            <div class="variant-row">
+              <span class="var-tag">2 items</span>
+              <nav class="breadcrumb">
+                <a href="#">Link</a>
+                <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+                <a href="#">Link</a>
+              </nav>
+            </div>
+            <div class="variant-row">
+              <span class="var-tag">3 items</span>
+              <nav class="breadcrumb">
+                <a href="#">Link</a>
+                <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+                <a href="#">Link</a>
+                <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+                <a href="#">Link</a>
+              </nav>
+            </div>
+            <div class="variant-row">
+              <span class="var-tag">4 items</span>
+              <nav class="breadcrumb">
+                <a href="#">Link</a>
+                <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+                <a href="#">Link</a>
+                <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+                <a href="#">Link</a>
+                <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+                <a href="#">Link</a>
+              </nav>
+            </div>
+          </div>
+
           <div class="component-card">
             <div class="c-title">CTA-BottomButtonGroup</div>
-            <div class="c-desc">페이지 하단 고정. 가장 중요한 액션 한 개에만 사용.</div>
-            <div class="cta-wrap"><button class="cta-button">Button</button></div>
+            <div class="c-desc">페이지 하단 고정 액션 영역. Button=1 / 2 / 2-text 변형.</div>
+            <div class="variant-row">
+              <span class="var-tag">Button=1</span>
+              <div class="btn-stage"><button class="cta-button">Button</button></div>
+            </div>
+            <div class="variant-row">
+              <span class="var-tag">Button=2</span>
+              <div class="btn-stage">
+                <div class="btn-row-2">
+                  <button class="btn-secondary">Secondary</button>
+                  <button class="cta-button">Primary</button>
+                </div>
+              </div>
+            </div>
+            <div class="variant-row">
+              <span class="var-tag">Button=2-text</span>
+              <div class="btn-stage">
+                <div class="btn-row-text">
+                  <button class="btn-text">취소</button>
+                  <span class="divider"></span>
+                  <button class="btn-text primary">확인</button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="component-card">
