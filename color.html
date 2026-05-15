@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color · Baropharm Design System</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div id="topbar-mount"></div>
+  <div class="app">
+    <div id="sidebar-mount"></div>
+    <main class="main">
+      <section id="text" class="panel">
+        <header><h2>Text Colors</h2><p>본문 / 보조 / 비활성 텍스트 컬러 · 클릭 시 hex 복사</p></header>
+        <div class="swatch-grid" data-swatches="text"></div>
+      </section>
+
+      <section id="surface" class="panel">
+        <header><h2>Surface Colors</h2><p>Background / Fill / Border</p></header>
+        <div class="group">
+          <h3 class="group-title">Background <small>colorBgContainer · colorBgLayout · ...</small></h3>
+          <div class="swatch-grid" data-swatches="background"></div>
+        </div>
+        <div class="group">
+          <h3 class="group-title">Fill <small>colorFill · colorFillSecondary · ...</small></h3>
+          <div class="swatch-grid" data-swatches="fill"></div>
+        </div>
+        <div class="group">
+          <h3 class="group-title">Border <small>colorBorder · colorBorderDark · ...</small></h3>
+          <div class="swatch-grid" data-swatches="border"></div>
+        </div>
+      </section>
+
+      <section id="primary" class="panel">
+        <header><h2>Primary (Baropharm Blue)</h2><p>기본 Primary · 10단계 (Bg → Border → Hover → Primary → Active → Text)</p></header>
+        <div class="service-panel" data-service-panel="Baropharm"></div>
+      </section>
+
+      <section id="services" class="panel">
+        <header><h2>Service Primaries</h2><p>서비스별 브랜드 컬러 6종 · 동일한 10단계 토큰 구조</p></header>
+        <div class="tabs" id="service-tabs"></div>
+        <div class="service-panel" id="service-panel"></div>
+      </section>
+
+      <section id="status" class="panel">
+        <header><h2>Status Colors</h2><p>성공 / 경고 / 오류</p></header>
+        <div class="swatch-grid" data-swatches="status"></div>
+      </section>
+
+      <section id="service-misc" class="panel">
+        <header><h2>Service Misc Colors</h2><p>서비스 라벨링 보조 컬러</p></header>
+        <div class="swatch-grid" data-swatches="service-misc"></div>
+      </section>
+
+      <section id="palette" class="panel">
+        <header><h2>Color Palette</h2><p>Ant Design 계열 13색 × 10단계</p></header>
+        <div id="palette-list"></div>
+      </section>
+
+      <section id="membership" class="panel">
+        <header><h2>Membership Colors</h2><p>멤버십 등급별 FG + BG 페어</p></header>
+        <div class="membership-grid" id="membership-list"></div>
+      </section>
+
+      <section id="partners" class="panel">
+        <header><h2>Partner Brand Colors</h2><p>파트너 제약사 22개사 · 한글명 / hex 검색 가능</p></header>
+        <div class="partner-search">
+          <input id="partner-search-input" type="text" placeholder="브랜드명 또는 hex 검색" />
+        </div>
+        <div class="brand-grid" id="partners-list"></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast">복사됨</div>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

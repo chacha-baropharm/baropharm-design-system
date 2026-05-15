@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Components · Baropharm Design System</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div id="topbar-mount"></div>
+  <div class="app">
+    <div id="sidebar-mount"></div>
+    <main class="main">
+      <section id="components" class="panel">
+        <header><h2>Components</h2><p>모바일 UI 컴포넌트</p></header>
+        <div class="components-grid">
+          <div class="component-card">
+            <div class="c-title">CTA-BottomButtonGroup</div>
+            <div class="c-desc">페이지 하단 고정. 가장 중요한 액션 한 개에만 사용.</div>
+            <div class="cta-wrap"><button class="cta-button">Button</button></div>
+          </div>
+
+          <div class="component-card">
+            <div class="c-title">Select-items</div>
+            <div class="c-desc">Default / Selected 상태. 선택 시 Primary + SemiBold + 체크.</div>
+            <div class="select-list">
+              <div class="select-item default"><span class="item-text">items</span></div>
+              <div class="select-item selected">
+                <span class="item-text">items</span>
+                <span class="check-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </div>
+              <div class="select-item default"><span class="item-text">items</span></div>
+            </div>
+          </div>
+
+          <div class="component-card" style="grid-column: 1 / -1;">
+            <div class="c-title">BottomSheet</div>
+            <div class="c-desc">화면 하단 UI · Sheet header + Title + List + CTA + Home indicator</div>
+            <div class="device-frame">
+              <div class="bottom-sheet">
+                <div class="sheet-header"><div class="drag-handle"></div></div>
+                <div class="sheet-title-row">
+                  <div class="sheet-title">Title</div>
+                  <button class="close-btn" aria-label="close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+                <div class="sheet-body">
+                  <div class="select-list">
+                    <div class="select-item default"><span class="item-text">items</span></div>
+                    <div class="select-item selected">
+                      <span class="item-text">items</span>
+                      <span class="check-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                    </div>
+                    <div class="select-item default"><span class="item-text">items</span></div>
+                    <div class="select-item default"><span class="item-text">items</span></div>
+                  </div>
+                </div>
+                <div class="sheet-footer"><button class="cta-button">Button</button></div>
+                <div class="home-indicator"><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast">복사됨</div>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
