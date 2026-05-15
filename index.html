@@ -7,72 +7,218 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
     :root {
-      --text-colorTextBase: #000000;
-      --text-colorText: #1f1f1f;
-      --text-colorTextSecondary: #595959;
-      --text-colorTextTertiary: #8c8c8c;
-      --text-colorTextQuaternary: #bfbfbf;
-      --text-colorTextLight: #ffffff;
-
-      --background-colorBgBaseWhite: #ffffff;
-      --background-colorBgBaseBlack: #000000;
-      --background-colorBgLayout: #f4f6f8;
-      --background-colorBgDark: #141414;
-      --background-colorBgContainer: #ffffff;
-      --background-colorBgContainerDisabled: #f5f5f5;
-
-      --fill-colorFill: #ebebeb;
-      --fill-colorFillSecondary: #f5f5f5;
-      --fill-colorFillTertiary: #fafafa;
-
-      --border-colorBorder: #dbdbdb;
-      --border-colorBorderDark: #8d8d8f;
-      --border-colorBorderSecondary: #ebebeb;
-      --border-colorBorderDisabled: #ebebeb;
-
-      --primary-colorPrimaryTextActive: #00178c;
-      --primary-colorPrimaryText: #0024b2;
-      --primary-colorPrimaryTextHover: #1643d9;
-      --primary-colorPrimaryActive: #2660ff;
-      --primary-colorPrimary: #4e84ff;
-      --primary-colorPrimaryHover: #78a5ff;
-      --primary-colorPrimaryBorderHover: #a1c3ff;
-      --primary-colorPrimaryBorder: #c9dfff;
-      --primary-colorPrimaryBgHover: #e8f2ff;
-      --primary-colorPrimaryBg: #f5f9ff;
-
-      --success-colorSuccess: #52c41a;
-      --warning-colorWarning: #faad14;
-      --error-colorError: #f5222d;
+      --text: #1f1f1f;
+      --text-secondary: #595959;
+      --text-tertiary: #8c8c8c;
+      --text-light: #ffffff;
+      --bg-layout: #f4f6f8;
+      --bg-container: #ffffff;
+      --fill-1: #fafafa;
+      --fill-2: #f5f5f5;
+      --fill-3: #ebebeb;
+      --border: #ebebeb;
+      --border-strong: #dbdbdb;
+      --primary: #4e84ff;
+      --primary-hover: #78a5ff;
+      --primary-bg: #f5f9ff;
+      --primary-bg-hover: #e8f2ff;
+      --primary-border: #c9dfff;
+      --primary-text: #0024b2;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
     body {
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--background-colorBgLayout);
-      color: var(--text-colorText);
+      background: var(--bg-layout);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
 
-    header h1 { font-weight: 700; font-size: 32px; line-height: 40px; margin: 0 0 8px; }
-    header p { color: var(--text-colorTextSecondary); font-size: 14px; margin: 0 0 32px; }
-    code { background: var(--fill-colorFillTertiary); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+    /* ===== App layout ===== */
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
 
-    nav.toc { display: flex; flex-wrap: wrap; gap: 8px; background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); border-radius: 12px; padding: 14px; margin-bottom: 40px; }
-    nav.toc a { font-size: 13px; text-decoration: none; color: var(--primary-colorPrimaryText); background: var(--primary-colorPrimaryBg); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--primary-colorPrimaryBorder); }
-    nav.toc a:hover { background: var(--primary-colorPrimaryBgHover); }
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 32px;
+      align-self: start;
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
+      background: var(--bg-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 4px 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .sidebar .brand .logo {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #4e84ff 0%, #2660ff 100%);
+    }
+    .sidebar .brand .name {
+      font-weight: 700; font-size: 14px; line-height: 1.3;
+    }
+    .sidebar .brand .name small {
+      display: block;
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
 
-    section { margin-bottom: 64px; scroll-margin-top: 20px; }
-    section > h2 { font-weight: 700; font-size: 22px; line-height: 30px; margin: 0 0 6px; border-left: 4px solid var(--primary-colorPrimary); padding-left: 10px; }
-    section > p.section-desc { color: var(--text-colorTextSecondary); font-size: 14px; margin: 0 0 20px; }
+    .sidebar .nav-group {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 12px 8px 6px;
+    }
+    .sidebar a.nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: background .15s, color .15s;
+    }
+    .sidebar a.nav-link:hover { background: var(--fill-1); color: var(--text); }
+    .sidebar a.nav-link .count {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      background: var(--fill-2);
+      padding: 1px 6px;
+      border-radius: 100px;
+    }
 
-    h3.subhead { font-weight: 600; font-size: 16px; margin: 24px 0 12px; color: var(--text-colorText); }
-    h3.subhead small { color: var(--text-colorTextTertiary); font-weight: 400; font-size: 13px; margin-left: 8px; font-family: ui-monospace, monospace; }
+    /* Main */
+    .main { min-width: 0; }
+    .hero {
+      background: linear-gradient(135deg, #4e84ff 0%, #2660ff 100%);
+      color: #fff;
+      padding: 28px 28px 24px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-md);
+    }
+    .hero h1 {
+      margin: 0 0 6px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .hero .pills { margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .hero .pill {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+    }
 
-    .type-grid { display: grid; grid-template-columns: 80px 1fr 240px; gap: 14px 24px; background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); border-radius: 12px; padding: 20px 24px; align-items: center; }
-    .type-grid .label { color: var(--text-colorTextTertiary); font-size: 13px; font-family: ui-monospace, monospace; }
-    .type-grid .spec { color: var(--text-colorTextTertiary); font-size: 12px; font-family: ui-monospace, monospace; }
+    section.panel {
+      background: var(--bg-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 24px;
+    }
+    section.panel > header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    section.panel > header h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    section.panel > header p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    h3.group-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 12px;
+      color: var(--text-secondary);
+      display: flex; align-items: baseline; gap: 8px;
+    }
+    h3.group-title small {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-family: ui-monospace, monospace;
+      font-weight: 400;
+    }
+    .group + .group { margin-top: 22px; }
+
+    /* ===== Typography ===== */
+    .type-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .type-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 200px;
+      gap: 20px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .type-row:last-child { border-bottom: 0; }
+    .type-row .tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary-text);
+      background: var(--primary-bg);
+      padding: 3px 8px;
+      border-radius: 100px;
+      text-align: center;
+      display: inline-block;
+      justify-self: start;
+    }
+    .type-row .spec {
+      font-size: 12px;
+      font-family: ui-monospace, monospace;
+      color: var(--text-tertiary);
+      text-align: right;
+    }
     .t-h1 { font-weight: 700; font-size: 24px; line-height: 32px; }
     .t-h2 { font-weight: 600; font-size: 20px; line-height: 28px; }
     .t-h3 { font-weight: 600; font-size: 18px; line-height: 26px; }
@@ -80,281 +226,576 @@
     .t-b1 { font-weight: 400; font-size: 18px; line-height: 26px; }
     .t-b2 { font-weight: 400; font-size: 16px; line-height: 24px; }
     .t-b3 { font-weight: 400; font-size: 14px; line-height: 20px; }
-    .t-caption { font-weight: 400; font-size: 12px; line-height: 18px; }
+    .t-cap { font-weight: 400; font-size: 12px; line-height: 18px; color: var(--text-secondary); }
 
-    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
-    .swatch { background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); border-radius: 10px; overflow: hidden; }
-    .swatch .chip { height: 72px; }
-    .swatch .chip.bordered { box-shadow: inset 0 -1px 0 var(--border-colorBorder); }
+    /* ===== Swatches ===== */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .swatch {
+      background: var(--bg-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .swatch .chip { height: 64px; position: relative; }
+    .swatch .chip.bordered { box-shadow: inset 0 0 0 1px var(--border); }
     .swatch .meta { padding: 10px 12px 12px; }
-    .swatch .name { font-size: 13px; font-weight: 600; margin-bottom: 4px; word-break: break-all; }
-    .swatch .hex { font-size: 11px; color: var(--text-colorTextTertiary); font-family: ui-monospace, monospace; text-transform: uppercase; }
+    .swatch .name {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+    .swatch .hex {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: ui-monospace, monospace;
+      text-transform: uppercase;
+    }
 
-    .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-bottom: 12px; }
-    .scale .step { border-radius: 6px; overflow: hidden; background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); }
-    .scale .step .chip { height: 56px; }
-    .scale .step .info { padding: 6px 4px; text-align: center; font-size: 10px; font-family: ui-monospace, monospace; color: var(--text-colorTextSecondary); line-height: 1.3; }
-    .scale .step .info b { display: block; color: var(--text-colorText); }
+    /* ===== Service Tabs ===== */
+    .tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .tab {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-container);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all .15s;
+      font-family: inherit;
+    }
+    .tab:hover { background: var(--fill-1); }
+    .tab.active {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+    .tab .dot { width: 10px; height: 10px; border-radius: 50%; }
 
-    .service-card { background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
-    .service-card .service-name { font-weight: 700; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .service-card .service-name .dot { width: 14px; height: 14px; border-radius: 50%; }
-    .service-row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
-    .service-row .step { border-radius: 6px; overflow: hidden; border: 1px solid var(--border-colorBorder); }
-    .service-row .step .chip { height: 44px; }
-    .service-row .step .info { padding: 4px 2px; text-align: center; font-size: 9px; font-family: ui-monospace, monospace; color: var(--text-colorTextSecondary); line-height: 1.3; }
-    .service-row .step .info b { display: block; color: var(--text-colorText); font-size: 10px; }
+    .service-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .service-step {
+      background: var(--bg-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .15s;
+    }
+    .service-step:hover { transform: translateY(-2px); }
+    .service-step .chip { height: 56px; }
+    .service-step .info { padding: 8px 10px 10px; }
+    .service-step .info .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .service-step .info .hex {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-family: ui-monospace, monospace;
+      text-transform: uppercase;
+    }
 
-    .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-    .brand { background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); border-radius: 10px; padding: 12px; display: flex; align-items: center; gap: 10px; }
-    .brand .dot { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; }
+    /* ===== Palette scale ===== */
+    .scale {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+    .scale .step {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg-container);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .scale .step .chip { height: 48px; }
+    .scale .step .info {
+      padding: 6px 4px 8px;
+      text-align: center;
+    }
+    .scale .step .info .num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .scale .step .info .hex {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      font-family: ui-monospace, monospace;
+      text-transform: uppercase;
+    }
+
+    /* ===== Membership ===== */
+    .membership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .membership-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-container);
+    }
+    .membership-card .preview {
+      padding: 28px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .membership-card .pill {
+      padding: 8px 14px;
+      border-radius: 100px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .membership-card .tokens {
+      padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      font-family: ui-monospace, monospace;
+      line-height: 1.7;
+    }
+    .membership-card .tokens .row {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .membership-card .tokens .row + .row { margin-top: 2px; }
+    .membership-card .tokens .swatch-mini {
+      width: 12px; height: 12px; border-radius: 3px;
+      border: 1px solid var(--border-strong);
+      flex-shrink: 0;
+    }
+    .membership-card .tokens .hex { color: var(--text); font-weight: 600; }
+
+    /* ===== Partners ===== */
+    .partner-search {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .partner-search input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--fill-1);
+      outline: none;
+    }
+    .partner-search input:focus { border-color: var(--primary); background: var(--bg-container); }
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .brand {
+      background: var(--bg-container);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .brand:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .brand .dot { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; }
     .brand .info { min-width: 0; }
-    .brand .info .name { font-size: 13px; font-weight: 600; }
-    .brand .info .hex { font-size: 11px; color: var(--text-colorTextTertiary); font-family: ui-monospace, monospace; text-transform: uppercase; }
+    .brand .info .name { font-size: 13px; font-weight: 600; line-height: 1.3; }
+    .brand .info .hex {
+      font-size: 11px; color: var(--text-tertiary);
+      font-family: ui-monospace, monospace; text-transform: uppercase;
+      margin-top: 2px;
+    }
 
-    .membership-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-    .membership-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-colorBorder); background: var(--background-colorBgContainer); }
-    .membership-card .bg-area { padding: 24px 16px; }
-    .membership-card .fg-pill { display: inline-block; padding: 6px 12px; border-radius: 100px; color: #fff; font-weight: 600; font-size: 12px; }
-    .membership-card .meta { padding: 10px 14px; font-size: 11px; color: var(--text-colorTextTertiary); border-top: 1px solid var(--border-colorBorderSecondary); font-family: ui-monospace, monospace; line-height: 1.6; }
+    /* ===== Components ===== */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .component-card {
+      background: var(--fill-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .component-card .c-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+    .component-card .c-desc { font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px; line-height: 1.5; }
 
-    .components-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-    .component-card { background: var(--background-colorBgContainer); border: 1px solid var(--border-colorBorder); border-radius: 12px; padding: 20px; }
-    .component-card .title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
-    .component-card .desc { font-size: 13px; color: var(--text-colorTextSecondary); margin-bottom: 16px; }
+    .cta-button {
+      width: 100%;
+      background: var(--primary);
+      color: var(--text-light);
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      cursor: pointer;
+    }
+    .cta-button:hover { background: var(--primary-hover); }
+    .cta-wrap { padding: 16px; background: var(--bg-container); border-radius: 8px; border: 1px solid var(--border); }
 
-    .cta-button { width: 100%; background: var(--primary-colorPrimary); color: var(--text-colorTextLight); border: 0; border-radius: 8px; padding: 12px 16px; font-family: inherit; font-size: 16px; font-weight: 400; line-height: 24px; cursor: pointer; }
-    .cta-button:hover { background: var(--primary-colorPrimaryHover); }
-    .cta-button:active { background: var(--primary-colorPrimaryActive); }
-    .cta-wrap { padding: 16px; background: var(--fill-colorFillTertiary); border-radius: 8px; }
-
-    .select-list { display: flex; flex-direction: column; }
-    .select-item { display: flex; align-items: center; gap: 8px; height: 48px; padding: 8px; border-radius: 4px; font-size: 16px; line-height: 24px; }
-    .select-item.default { color: var(--text-colorText); font-weight: 400; }
-    .select-item.selected { color: var(--primary-colorPrimary); font-weight: 600; }
+    .select-list { background: var(--bg-container); border-radius: 8px; padding: 6px; border: 1px solid var(--border); }
+    .select-item { display: flex; align-items: center; gap: 8px; height: 44px; padding: 6px 10px; border-radius: 4px; font-size: 15px; line-height: 24px; }
+    .select-item.default { color: var(--text); }
+    .select-item.selected { color: var(--primary); font-weight: 600; }
     .select-item .item-text { flex: 1 0 0; min-width: 0; }
-    .check-icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; color: var(--primary-colorPrimary); }
+    .check-icon { width: 20px; height: 20px; color: var(--primary); }
 
-    .device-frame { width: 375px; max-width: 100%; margin: 0 auto; background: rgba(0,0,0,0.04); border-radius: 24px; padding: 12px; }
-    .bottom-sheet { background: var(--background-colorBgContainer); border-top-left-radius: 16px; border-top-right-radius: 16px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); overflow: hidden; }
-    .sheet-header { display: flex; justify-content: center; padding: 16px 16px 0; }
-    .drag-handle { width: 32px; height: 4px; background: var(--fill-colorFill); border-radius: 100px; }
-    .sheet-title-row { display: flex; align-items: flex-start; gap: 12px; padding: 16px; }
-    .sheet-title { flex: 1 0 0; font-weight: 600; font-size: 20px; line-height: 28px; color: var(--text-colorText); }
-    .close-btn { width: 24px; height: 24px; background: none; border: 0; cursor: pointer; color: var(--text-colorText); }
+    .device-frame {
+      width: 100%; max-width: 360px; margin: 0 auto;
+      background: rgba(0,0,0,0.04);
+      border-radius: 24px;
+      padding: 10px;
+    }
+    .bottom-sheet {
+      background: var(--bg-container);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .sheet-header { display: flex; justify-content: center; padding: 14px 16px 0; }
+    .drag-handle { width: 32px; height: 4px; background: var(--fill-3); border-radius: 100px; }
+    .sheet-title-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+    .sheet-title { flex: 1 0 0; font-weight: 600; font-size: 18px; }
+    .close-btn { width: 24px; height: 24px; background: none; border: 0; cursor: pointer; color: var(--text); padding: 0; }
     .sheet-body { padding: 0 16px; }
     .sheet-footer { padding: 16px; }
-    .home-indicator { display: flex; justify-content: center; padding: 20px 0 8px; }
-    .home-indicator span { width: 134px; height: 5px; background: var(--text-colorTextBase); border-radius: 100px; }
+    .home-indicator { display: flex; justify-content: center; padding: 16px 0 6px; }
+    .home-indicator span { width: 110px; height: 4px; background: #000; border-radius: 100px; }
 
-    @media (max-width: 720px) {
-      .type-grid { grid-template-columns: 60px 1fr; }
-      .type-grid .spec { grid-column: 2; }
-      .scale, .service-row { grid-template-columns: repeat(5, 1fr); }
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--text);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+      z-index: 100;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Mobile */
+    @media (max-width: 960px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        max-height: none;
+        margin-bottom: 8px;
+      }
+      .sidebar .nav-list { display: flex; flex-wrap: wrap; gap: 4px; }
+      .sidebar a.nav-link { padding: 6px 10px; font-size: 12px; }
+      .sidebar .nav-group { display: none; }
+      .sidebar .brand { padding-bottom: 12px; }
+      .scale { grid-template-columns: repeat(5, 1fr); }
+      .type-row { grid-template-columns: 60px 1fr; }
+      .type-row .spec { grid-column: 2; text-align: left; }
+      section.panel { padding: 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Baropharm Design System</h1>
-      <p>Figma 토큰 기반 컬러·타이포·컴포넌트 가이드 · fileKey <code>8JV1QkzSuEpZEMtLiLQYYv</code></p>
-    </header>
-
-    <nav class="toc">
-      <a href="#typography">Typography</a>
-      <a href="#text">Text</a>
-      <a href="#background">Background</a>
-      <a href="#fill">Fill</a>
-      <a href="#border">Border</a>
-      <a href="#primary">Primary</a>
-      <a href="#services">Service Primaries</a>
-      <a href="#status">Status</a>
-      <a href="#service-misc">Service Misc</a>
-      <a href="#palette">Color Palette</a>
-      <a href="#membership">Membership</a>
-      <a href="#partners">Partner Brands</a>
-      <a href="#components">Components</a>
-    </nav>
-
-    <section id="typography">
-      <h2>Typography</h2>
-      <p class="section-desc">Pretendard 사용. 주로 Bold(700) / SemiBold(600) / Regular(400)을 사용합니다.</p>
-      <div class="type-grid">
-        <span class="label">H1</span><span class="t-h1">제목 H1 Heading</span><span class="spec">Bold · 24 / 32</span>
-        <span class="label">H2</span><span class="t-h2">제목 H2 Heading</span><span class="spec">SemiBold · 20 / 28</span>
-        <span class="label">H3</span><span class="t-h3">제목 H3 Heading</span><span class="spec">SemiBold · 18 / 26</span>
-        <span class="label">H4</span><span class="t-h4">제목 H4 Heading</span><span class="spec">SemiBold · 16 / 24</span>
-        <span class="label">B1</span><span class="t-b1">본문 Body 1</span><span class="spec">Regular · 18 / 26</span>
-        <span class="label">B2</span><span class="t-b2">본문 Body 2</span><span class="spec">Regular · 16 / 24</span>
-        <span class="label">B3</span><span class="t-b3">본문 Body 3</span><span class="spec">Regular · 14 / 20</span>
-        <span class="label">Caption</span><span class="t-caption">캡션 Caption</span><span class="spec">Regular · 12 / 18</span>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div class="name">Baropharm<small>Design System</small></div>
       </div>
-    </section>
 
-    <section id="text">
-      <h2>Text Colors</h2>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">Text/colorTextBase</div><div class="hex">#000000</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#1f1f1f"></div><div class="meta"><div class="name">Text/colorText</div><div class="hex">#1f1f1f</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#595959"></div><div class="meta"><div class="name">Text/colorTextSecondary</div><div class="hex">#595959</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#8c8c8c"></div><div class="meta"><div class="name">Text/colorTextTertiary</div><div class="hex">#8c8c8c</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#bfbfbf"></div><div class="meta"><div class="name">Text/colorTextQuaternary</div><div class="hex">#bfbfbf</div></div></div>
-        <div class="swatch"><div class="chip bordered" style="background:#ffffff"></div><div class="meta"><div class="name">Text/colorTextLight</div><div class="hex">#ffffff</div></div></div>
+      <div class="nav-group">Foundation</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#typography">Typography</a>
+        <a class="nav-link" href="#text">Text Colors</a>
+        <a class="nav-link" href="#surface">Surface</a>
       </div>
-    </section>
 
-    <section id="background">
-      <h2>Background Colors</h2>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip bordered" style="background:#ffffff"></div><div class="meta"><div class="name">Background/colorBgBaseWhite</div><div class="hex">#ffffff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">Background/colorBgBaseBlack</div><div class="hex">#000000</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#f4f6f8"></div><div class="meta"><div class="name">Background/colorBgLayout</div><div class="hex">#f4f6f8</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#141414"></div><div class="meta"><div class="name">Background/colorBgDark</div><div class="hex">#141414</div></div></div>
-        <div class="swatch"><div class="chip bordered" style="background:#ffffff"></div><div class="meta"><div class="name">Background/colorBgContainer</div><div class="hex">#ffffff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#f5f5f5"></div><div class="meta"><div class="name">Background/colorBgContainerDisabled</div><div class="hex">#f5f5f5</div></div></div>
+      <div class="nav-group">Brand Colors</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#primary">Primary</a>
+        <a class="nav-link" href="#services">Service Primaries <span class="count">6</span></a>
+        <a class="nav-link" href="#status">Status</a>
+        <a class="nav-link" href="#service-misc">Service Misc</a>
       </div>
-    </section>
 
-    <section id="fill">
-      <h2>Fill Colors</h2>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip" style="background:#ebebeb"></div><div class="meta"><div class="name">Fill/colorFill</div><div class="hex">#ebebeb</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#f5f5f5"></div><div class="meta"><div class="name">Fill/colorFillSecondary</div><div class="hex">#f5f5f5</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#fafafa"></div><div class="meta"><div class="name">Fill/colorFillTertiary</div><div class="hex">#fafafa</div></div></div>
+      <div class="nav-group">Palette</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#palette">Color Scales <span class="count">13</span></a>
       </div>
-    </section>
 
-    <section id="border">
-      <h2>Border Colors</h2>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip" style="background:#dbdbdb"></div><div class="meta"><div class="name">Border/colorBorder</div><div class="hex">#dbdbdb</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#8d8d8f"></div><div class="meta"><div class="name">Border/colorBorderDark</div><div class="hex">#8d8d8f</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#ebebeb"></div><div class="meta"><div class="name">Border/colorBorderSecondary</div><div class="hex">#ebebeb</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#ebebeb"></div><div class="meta"><div class="name">Border/colorBorderDisabled</div><div class="hex">#ebebeb</div></div></div>
+      <div class="nav-group">Specialty</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#membership">Membership <span class="count">7</span></a>
+        <a class="nav-link" href="#partners">Partners <span class="count">22</span></a>
       </div>
-    </section>
 
-    <section id="primary">
-      <h2>Primary (Default = Baropharm Blue)</h2>
-      <p class="section-desc">기본 Primary 토큰 세트. Bg → Border → Hover → Primary → Active → Text 순으로 어두워지는 10단계.</p>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip" style="background:#f5f9ff"></div><div class="meta"><div class="name">Primary/colorPrimaryBg</div><div class="hex">#f5f9ff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#e8f2ff"></div><div class="meta"><div class="name">Primary/colorPrimaryBgHover</div><div class="hex">#e8f2ff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#c9dfff"></div><div class="meta"><div class="name">Primary/colorPrimaryBorder</div><div class="hex">#c9dfff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#a1c3ff"></div><div class="meta"><div class="name">Primary/colorPrimaryBorderHover</div><div class="hex">#a1c3ff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#78a5ff"></div><div class="meta"><div class="name">Primary/colorPrimaryHover</div><div class="hex">#78a5ff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#4e84ff"></div><div class="meta"><div class="name">Primary/colorPrimary</div><div class="hex">#4e84ff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#2660ff"></div><div class="meta"><div class="name">Primary/colorPrimaryActive</div><div class="hex">#2660ff</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#1643d9"></div><div class="meta"><div class="name">Primary/colorPrimaryTextHover</div><div class="hex">#1643d9</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#0024b2"></div><div class="meta"><div class="name">Primary/colorPrimaryText</div><div class="hex">#0024b2</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#00178c"></div><div class="meta"><div class="name">Primary/colorPrimaryTextActive</div><div class="hex">#00178c</div></div></div>
+      <div class="nav-group">Components</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#components">Mobile UI</a>
       </div>
-    </section>
+    </aside>
 
-    <section id="services">
-      <h2>Service Primaries</h2>
-      <p class="section-desc">서비스별 브랜드 컬러. 동일한 10단계 토큰 구조 (Bg → BgHover → Border → BorderHover → Hover → Primary → Active → TextHover → Text → TextActive).</p>
-      <div id="services-list"></div>
-    </section>
-
-    <section id="status">
-      <h2>Status Colors</h2>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip" style="background:#52c41a"></div><div class="meta"><div class="name">Success/colorSuccess</div><div class="hex">#52c41a</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#faad14"></div><div class="meta"><div class="name">Warning/colorWarning</div><div class="hex">#faad14</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#f5222d"></div><div class="meta"><div class="name">Error/colorError</div><div class="hex">#f5222d</div></div></div>
-      </div>
-    </section>
-
-    <section id="service-misc">
-      <h2>Service Misc Colors</h2>
-      <div class="swatch-grid">
-        <div class="swatch"><div class="chip" style="background:#003cd5"></div><div class="meta"><div class="name">Service/colorService_business</div><div class="hex">#003cd5</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#2ac1bc"></div><div class="meta"><div class="name">Service/colorService_Community</div><div class="hex">#2ac1bc</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#23c17d"></div><div class="meta"><div class="name">Service/colorService_Point</div><div class="hex">#23c17d</div></div></div>
-      </div>
-    </section>
-
-    <section id="palette">
-      <h2>Color Palette</h2>
-      <p class="section-desc">Ant Design 계열 13색 × 10단계 팔레트.</p>
-      <div id="palette-list"></div>
-    </section>
-
-    <section id="membership">
-      <h2>Membership Colors</h2>
-      <p class="section-desc">멤버십 등급 컬러. 본 컬러(FG)와 배경(BG) 페어로 구성.</p>
-      <div class="membership-grid" id="membership-list"></div>
-    </section>
-
-    <section id="partners">
-      <h2>Partner Brand Colors</h2>
-      <p class="section-desc">파트너 제약사 브랜드 컬러.</p>
-      <div class="brand-grid" id="partners-list"></div>
-    </section>
-
-    <section id="components">
-      <h2>Components</h2>
-      <div class="components-row">
-        <div class="component-card">
-          <div class="title">CTA-BottomButtonGroup</div>
-          <div class="desc">페이지 하단 고정. 가장 중요한 액션 한 개에만 사용.</div>
-          <div class="cta-wrap"><button class="cta-button">Button</button></div>
+    <!-- Main -->
+    <main class="main">
+      <div class="hero">
+        <h1>Baropharm Design System</h1>
+        <p>Figma 토큰 기반 컬러 · 타이포그래피 · 컴포넌트 가이드</p>
+        <div class="pills">
+          <span class="pill">Pretendard</span>
+          <span class="pill">13 Color Scales</span>
+          <span class="pill">6 Service Primaries</span>
+          <span class="pill">22 Partner Brands</span>
         </div>
+      </div>
 
-        <div class="component-card">
-          <div class="title">Select-items</div>
-          <div class="desc">Default / Selected 상태. 선택 시 Primary + SemiBold + 체크 아이콘.</div>
-          <div class="select-list">
-            <div class="select-item default"><span class="item-text">items</span></div>
-            <div class="select-item selected">
-              <span class="item-text">items</span>
-              <span class="check-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </span>
-            </div>
-            <div class="select-item default"><span class="item-text">items</span></div>
+      <section id="typography" class="panel">
+        <header>
+          <h2>Typography</h2>
+          <p>Pretendard · Bold (700) / SemiBold (600) / Regular (400)</p>
+        </header>
+        <div class="type-list">
+          <div class="type-row"><span class="tag">H1</span><span class="t-h1">제목 H1 Heading</span><span class="spec">Bold · 24 / 32</span></div>
+          <div class="type-row"><span class="tag">H2</span><span class="t-h2">제목 H2 Heading</span><span class="spec">SemiBold · 20 / 28</span></div>
+          <div class="type-row"><span class="tag">H3</span><span class="t-h3">제목 H3 Heading</span><span class="spec">SemiBold · 18 / 26</span></div>
+          <div class="type-row"><span class="tag">H4</span><span class="t-h4">제목 H4 Heading</span><span class="spec">SemiBold · 16 / 24</span></div>
+          <div class="type-row"><span class="tag">B1</span><span class="t-b1">본문 Body 1</span><span class="spec">Regular · 18 / 26</span></div>
+          <div class="type-row"><span class="tag">B2</span><span class="t-b2">본문 Body 2</span><span class="spec">Regular · 16 / 24</span></div>
+          <div class="type-row"><span class="tag">B3</span><span class="t-b3">본문 Body 3</span><span class="spec">Regular · 14 / 20</span></div>
+          <div class="type-row"><span class="tag">Cap</span><span class="t-cap">캡션 Caption</span><span class="spec">Regular · 12 / 18</span></div>
+        </div>
+      </section>
+
+      <section id="text" class="panel">
+        <header>
+          <h2>Text Colors</h2>
+          <p>본문 / 보조 / 비활성 텍스트 컬러</p>
+        </header>
+        <div class="swatch-grid" data-swatches="text"></div>
+      </section>
+
+      <section id="surface" class="panel">
+        <header>
+          <h2>Surface Colors</h2>
+          <p>Background / Fill / Border 토큰</p>
+        </header>
+        <div class="group">
+          <h3 class="group-title">Background <small>colorBgContainer · colorBgLayout · ...</small></h3>
+          <div class="swatch-grid" data-swatches="background"></div>
+        </div>
+        <div class="group">
+          <h3 class="group-title">Fill <small>colorFill · colorFillSecondary · ...</small></h3>
+          <div class="swatch-grid" data-swatches="fill"></div>
+        </div>
+        <div class="group">
+          <h3 class="group-title">Border <small>colorBorder · colorBorderDark · ...</small></h3>
+          <div class="swatch-grid" data-swatches="border"></div>
+        </div>
+      </section>
+
+      <section id="primary" class="panel">
+        <header>
+          <h2>Primary (Baropharm Blue)</h2>
+          <p>기본 Primary 토큰 · 10단계 (Bg → Border → Hover → Primary → Active → Text)</p>
+        </header>
+        <div class="service-panel" data-service-panel="Baropharm"></div>
+      </section>
+
+      <section id="services" class="panel">
+        <header>
+          <h2>Service Primaries</h2>
+          <p>서비스별 브랜드 컬러. 동일한 10단계 토큰 구조. 탭으로 서비스를 전환하세요.</p>
+        </header>
+        <div class="tabs" id="service-tabs"></div>
+        <div class="service-panel" id="service-panel"></div>
+      </section>
+
+      <section id="status" class="panel">
+        <header>
+          <h2>Status Colors</h2>
+          <p>성공 / 경고 / 오류 알림</p>
+        </header>
+        <div class="swatch-grid" data-swatches="status"></div>
+      </section>
+
+      <section id="service-misc" class="panel">
+        <header>
+          <h2>Service Misc Colors</h2>
+          <p>서비스 라벨링용 보조 컬러</p>
+        </header>
+        <div class="swatch-grid" data-swatches="service-misc"></div>
+      </section>
+
+      <section id="palette" class="panel">
+        <header>
+          <h2>Color Palette</h2>
+          <p>Ant Design 계열 13색 × 10단계</p>
+        </header>
+        <div id="palette-list"></div>
+      </section>
+
+      <section id="membership" class="panel">
+        <header>
+          <h2>Membership Colors</h2>
+          <p>멤버십 등급별 본 컬러(FG) + 배경(BG) 페어</p>
+        </header>
+        <div class="membership-grid" id="membership-list"></div>
+      </section>
+
+      <section id="partners" class="panel">
+        <header>
+          <h2>Partner Brand Colors</h2>
+          <p>파트너 제약사 22개사</p>
+        </header>
+        <div class="partner-search">
+          <input id="partner-search-input" type="text" placeholder="브랜드명 또는 hex 검색" />
+        </div>
+        <div class="brand-grid" id="partners-list"></div>
+      </section>
+
+      <section id="components" class="panel">
+        <header>
+          <h2>Components</h2>
+          <p>모바일 UI 컴포넌트 미리보기</p>
+        </header>
+        <div class="components-grid">
+          <div class="component-card">
+            <div class="c-title">CTA-BottomButtonGroup</div>
+            <div class="c-desc">페이지 하단 고정. 가장 중요한 액션 하나에만 사용.</div>
+            <div class="cta-wrap"><button class="cta-button">Button</button></div>
           </div>
-        </div>
 
-        <div class="component-card" style="grid-column: 1 / -1;">
-          <div class="title">BottomSheet</div>
-          <div class="desc">화면 하단을 기준으로 나타나는 UI. SheetHeader + Title + List + CTA + Home indicator 구성.</div>
-          <div class="device-frame">
-            <div class="bottom-sheet">
-              <div class="sheet-header"><div class="drag-handle"></div></div>
-              <div class="sheet-title-row">
-                <div class="sheet-title">Title</div>
-                <button class="close-btn" aria-label="close">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
+          <div class="component-card">
+            <div class="c-title">Select-items</div>
+            <div class="c-desc">Default / Selected 상태. 선택 시 Primary + SemiBold + 체크 아이콘.</div>
+            <div class="select-list">
+              <div class="select-item default"><span class="item-text">items</span></div>
+              <div class="select-item selected">
+                <span class="item-text">items</span>
+                <span class="check-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
               </div>
-              <div class="sheet-body">
-                <div class="select-list">
-                  <div class="select-item default"><span class="item-text">items</span></div>
-                  <div class="select-item selected">
-                    <span class="item-text">items</span>
-                    <span class="check-icon">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                  </div>
-                  <div class="select-item default"><span class="item-text">items</span></div>
-                  <div class="select-item default"><span class="item-text">items</span></div>
-                  <div class="select-item default"><span class="item-text">items</span></div>
-                  <div class="select-item default"><span class="item-text">items</span></div>
+              <div class="select-item default"><span class="item-text">items</span></div>
+            </div>
+          </div>
+
+          <div class="component-card" style="grid-column: 1 / -1;">
+            <div class="c-title">BottomSheet</div>
+            <div class="c-desc">화면 하단 UI · Sheet header + Title + List + CTA + Home indicator</div>
+            <div class="device-frame">
+              <div class="bottom-sheet">
+                <div class="sheet-header"><div class="drag-handle"></div></div>
+                <div class="sheet-title-row">
+                  <div class="sheet-title">Title</div>
+                  <button class="close-btn" aria-label="close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
                 </div>
+                <div class="sheet-body">
+                  <div class="select-list">
+                    <div class="select-item default"><span class="item-text">items</span></div>
+                    <div class="select-item selected">
+                      <span class="item-text">items</span>
+                      <span class="check-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                    </div>
+                    <div class="select-item default"><span class="item-text">items</span></div>
+                    <div class="select-item default"><span class="item-text">items</span></div>
+                  </div>
+                </div>
+                <div class="sheet-footer"><button class="cta-button">Button</button></div>
+                <div class="home-indicator"><span></span></div>
               </div>
-              <div class="sheet-footer"><button class="cta-button">Button</button></div>
-              <div class="home-indicator"><span></span></div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   </div>
 
+  <div class="toast" id="toast">복사됨</div>
+
   <script>
+    /* ========= Data ========= */
+    const swatchData = {
+      text: [
+        ['Text/colorTextBase','#000000'],
+        ['Text/colorText','#1f1f1f'],
+        ['Text/colorTextSecondary','#595959'],
+        ['Text/colorTextTertiary','#8c8c8c'],
+        ['Text/colorTextQuaternary','#bfbfbf'],
+        ['Text/colorTextLight','#ffffff'],
+      ],
+      background: [
+        ['Background/colorBgBaseWhite','#ffffff'],
+        ['Background/colorBgBaseBlack','#000000'],
+        ['Background/colorBgLayout','#f4f6f8'],
+        ['Background/colorBgDark','#141414'],
+        ['Background/colorBgContainer','#ffffff'],
+        ['Background/colorBgContainerDisabled','#f5f5f5'],
+      ],
+      fill: [
+        ['Fill/colorFill','#ebebeb'],
+        ['Fill/colorFillSecondary','#f5f5f5'],
+        ['Fill/colorFillTertiary','#fafafa'],
+      ],
+      border: [
+        ['Border/colorBorder','#dbdbdb'],
+        ['Border/colorBorderDark','#8d8d8f'],
+        ['Border/colorBorderSecondary','#ebebeb'],
+        ['Border/colorBorderDisabled','#ebebeb'],
+      ],
+      status: [
+        ['Success/colorSuccess','#52c41a'],
+        ['Warning/colorWarning','#faad14'],
+        ['Error/colorError','#f5222d'],
+      ],
+      'service-misc': [
+        ['Service/colorService_business','#003cd5'],
+        ['Service/colorService_Community','#2ac1bc'],
+        ['Service/colorService_Point','#23c17d'],
+      ],
+    };
+
     const services = [
       { name: 'Baropharm', steps: ['#f5f9ff','#e8f2ff','#c9dfff','#a1c3ff','#78a5ff','#4e84ff','#2660ff','#1643d9','#0024b2','#00178c'] },
       { name: 'Pillens', steps: ['#eaebfd','#cbccf9','#a7abf4','#8289f0','#666dec','#4b4fe6','#4647da','#3d3cce','#3530c2','#2615b0'] },
@@ -364,24 +805,6 @@
       { name: 'PharmAll', steps: ['#f0f5ff','#d6e4ff','#adc6ff','#85a5ff','#597ef7','#2f54eb','#1d39c4','#10239e','#061178','#030852'] },
     ];
     const stepLabels = ['Bg','BgHover','Border','BorderHover','Hover','Primary','Active','TextHover','Text','TextActive'];
-    const servicesEl = document.getElementById('services-list');
-    services.forEach(s => {
-      const card = document.createElement('div');
-      card.className = 'service-card';
-      const primaryHex = s.steps[5];
-      card.innerHTML = `
-        <div class="service-name"><span class="dot" style="background:${primaryHex}"></span>${s.name} <small style="color:var(--text-colorTextTertiary);font-weight:400;font-family:ui-monospace,monospace;">${primaryHex}</small></div>
-        <div class="service-row">
-          ${s.steps.map((hex,i)=>`
-            <div class="step">
-              <div class="chip" style="background:${hex}"></div>
-              <div class="info"><b>${stepLabels[i]}</b>${hex}</div>
-            </div>
-          `).join('')}
-        </div>
-      `;
-      servicesEl.appendChild(card);
-    });
 
     const palette = {
       grey: ['#fafafa','#f5f5f5','#ebebeb','#dbdbdb','#c7c7c7','#adadad','#8d8d8f','#69696b','#424242','#141414'],
@@ -398,22 +821,6 @@
       geekblue: ['#f0f5ff','#d6e4ff','#adc6ff','#85a5ff','#597ef7','#2f54eb','#1d39c4','#10239e','#061178','#030852'],
       lime: ['#fcffe6','#f4ffb8','#eaff8f','#d3f261','#bae637','#a0d911','#7cb305','#5b8c00','#3f6600','#254000'],
     };
-    const paletteEl = document.getElementById('palette-list');
-    Object.entries(palette).forEach(([name, steps]) => {
-      const block = document.createElement('div');
-      block.innerHTML = `
-        <h3 class="subhead">${name} <small>Colors/${name}/1 – 10</small></h3>
-        <div class="scale">
-          ${steps.map((hex,i)=>`
-            <div class="step">
-              <div class="chip" style="background:${hex}"></div>
-              <div class="info"><b>${i+1}</b>${hex}</div>
-            </div>
-          `).join('')}
-        </div>
-      `;
-      paletteEl.appendChild(block);
-    });
 
     const memberships = [
       { name: 'Family', fg: '#7a99ab', bg: '#f4f7f8' },
@@ -424,21 +831,6 @@
       { name: 'Purple', fg: '#9e50b9', bg: '#f6f0fb' },
       { name: 'Black', fg: '#31383f', bg: '#f1f3f5' },
     ];
-    const memberEl = document.getElementById('membership-list');
-    memberships.forEach(m => {
-      const card = document.createElement('div');
-      card.className = 'membership-card';
-      card.innerHTML = `
-        <div class="bg-area" style="background:${m.bg}">
-          <span class="fg-pill" style="background:${m.fg}">${m.name} 멤버십</span>
-        </div>
-        <div class="meta">
-          colorMembership_${m.name}: <b style="color:var(--text-colorText)">${m.fg}</b><br/>
-          colorMembership_${m.name}_BG: <b style="color:var(--text-colorText)">${m.bg}</b>
-        </div>
-      `;
-      memberEl.appendChild(card);
-    });
 
     const partners = [
       ['아워팜','#43a536'],['켄뷰','#00b197'],['경동제약','#49a993'],['퍼슨','#dd4349'],
@@ -448,19 +840,140 @@
       ['유유제약','#004a97'],['일동후디스','#e60021'],['뉴트리','#076d3a'],['현대약품','#005b69'],
       ['앨리스랩','#004079'],['한풍제약','#2e3092'],
     ];
-    const partnersEl = document.getElementById('partners-list');
-    partners.forEach(([name, hex]) => {
-      const el = document.createElement('div');
-      el.className = 'brand';
-      el.innerHTML = `
-        <div class="dot" style="background:${hex}"></div>
-        <div class="info">
-          <div class="name">${name}</div>
-          <div class="hex">${hex}</div>
+
+    /* ========= Helpers ========= */
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1400);
+    }
+    function copyHex(hex) {
+      navigator.clipboard.writeText(hex).then(() => showToast(hex + ' 복사됨'));
+    }
+    function isLight(hex) {
+      const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+      return (r*299 + g*587 + b*114) / 1000 > 175;
+    }
+
+    /* ========= Render swatches ========= */
+    document.querySelectorAll('[data-swatches]').forEach(el => {
+      const key = el.dataset.swatches;
+      el.innerHTML = swatchData[key].map(([name, hex]) => {
+        const needsBorder = hex.toLowerCase() === '#ffffff';
+        return `
+          <div class="swatch" onclick="copyHex('${hex}')">
+            <div class="chip ${needsBorder?'bordered':''}" style="background:${hex}"></div>
+            <div class="meta">
+              <div class="name">${name}</div>
+              <div class="hex">${hex}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    });
+
+    /* ========= Render Primary (Baropharm) ========= */
+    function renderServicePanel(container, service) {
+      container.innerHTML = service.steps.map((hex,i) => `
+        <div class="service-step" onclick="copyHex('${hex}')">
+          <div class="chip" style="background:${hex}"></div>
+          <div class="info">
+            <div class="label">${stepLabels[i]}</div>
+            <div class="hex">${hex}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+    document.querySelectorAll('[data-service-panel]').forEach(el => {
+      const svc = services.find(s => s.name === el.dataset.servicePanel);
+      renderServicePanel(el, svc);
+    });
+
+    /* ========= Service tabs ========= */
+    const tabsEl = document.getElementById('service-tabs');
+    const panelEl = document.getElementById('service-panel');
+    services.forEach((s, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'tab' + (idx === 0 ? ' active' : '');
+      btn.innerHTML = `<span class="dot" style="background:${s.steps[5]}"></span>${s.name}`;
+      btn.onclick = () => {
+        document.querySelectorAll('#service-tabs .tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        renderServicePanel(panelEl, s);
+      };
+      tabsEl.appendChild(btn);
+    });
+    renderServicePanel(panelEl, services[0]);
+
+    /* ========= Palette ========= */
+    const paletteEl = document.getElementById('palette-list');
+    Object.entries(palette).forEach(([name, steps]) => {
+      const block = document.createElement('div');
+      block.className = 'group';
+      block.innerHTML = `
+        <h3 class="group-title">${name} <small>Colors/${name}/1 – 10</small></h3>
+        <div class="scale">
+          ${steps.map((hex,i) => `
+            <div class="step" onclick="copyHex('${hex}')">
+              <div class="chip" style="background:${hex}"></div>
+              <div class="info">
+                <div class="num">${i+1}</div>
+                <div class="hex">${hex}</div>
+              </div>
+            </div>
+          `).join('')}
         </div>
       `;
-      partnersEl.appendChild(el);
+      paletteEl.appendChild(block);
     });
+
+    /* ========= Membership ========= */
+    const memberEl = document.getElementById('membership-list');
+    memberships.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'membership-card';
+      card.innerHTML = `
+        <div class="preview" style="background:${m.bg}">
+          <span class="pill" style="background:${m.fg}">${m.name} 멤버십</span>
+        </div>
+        <div class="tokens">
+          <div class="row" onclick="copyHex('${m.fg}')" style="cursor:pointer">
+            <span class="swatch-mini" style="background:${m.fg}"></span>
+            <span>FG</span>
+            <span class="hex">${m.fg}</span>
+          </div>
+          <div class="row" onclick="copyHex('${m.bg}')" style="cursor:pointer">
+            <span class="swatch-mini" style="background:${m.bg}"></span>
+            <span>BG</span>
+            <span class="hex">${m.bg}</span>
+          </div>
+        </div>
+      `;
+      memberEl.appendChild(card);
+    });
+
+    /* ========= Partners ========= */
+    const partnersEl = document.getElementById('partners-list');
+    function renderPartners(filter = '') {
+      const f = filter.toLowerCase().trim();
+      const filtered = partners.filter(([name, hex]) =>
+        !f || name.toLowerCase().includes(f) || hex.toLowerCase().includes(f)
+      );
+      partnersEl.innerHTML = filtered.map(([name, hex]) => `
+        <div class="brand" onclick="copyHex('${hex}')">
+          <div class="dot" style="background:${hex}"></div>
+          <div class="info">
+            <div class="name">${name}</div>
+            <div class="hex">${hex}</div>
+          </div>
+        </div>
+      `).join('') || '<div style="padding:20px;color:var(--text-tertiary);font-size:13px">검색 결과 없음</div>';
+    }
+    renderPartners();
+    document.getElementById('partner-search-input').addEventListener('input', e => renderPartners(e.target.value));
   </script>
 </body>
 </html>
