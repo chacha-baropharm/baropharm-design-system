@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baropharm Design System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      /* Background */
+      --background-colorBgContainer: #ffffff;
+
+      /* Text */
+      --text-colorText: #1f1f1f;
+      --text-colorTextLight: #ffffff;
+
+      /* Fill */
+      --fill-colorFill: #ebebeb;
+
+      /* Border */
+      --border-colorBorder: #dbdbdb;
+
+      /* Service Primary */
+      --primary-baropharm-colorPrimary: #4e84ff;
+
+      /* Page */
+      --page-bg: #f5f6f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-colorText);
+      padding: 40px 24px 80px;
+    }
+
+    h1.page-title {
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 36px;
+      margin: 0 0 8px;
+    }
+    .page-sub { color: #6b6b6b; margin-bottom: 40px; font-size: 14px; }
+
+    section { margin-bottom: 56px; }
+    section > h2 {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      margin: 0 0 16px;
+      border-left: 4px solid var(--primary-baropharm-colorPrimary);
+      padding-left: 10px;
+    }
+
+    /* ===== Typography ===== */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr 220px;
+      gap: 12px 24px;
+      background: var(--background-colorBgContainer);
+      border: 1px solid var(--border-colorBorder);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .type-grid .row { display: contents; }
+    .type-grid .label { color: #6b6b6b; font-size: 14px; align-self: center; }
+    .type-grid .spec { color: #6b6b6b; font-size: 13px; align-self: center; font-family: ui-monospace, monospace; }
+
+    .h2 { font-weight: 600; font-size: 20px; line-height: 28px; }
+    .h4 { font-weight: 600; font-size: 16px; line-height: 24px; }
+    .b2 { font-weight: 400; font-size: 16px; line-height: 24px; }
+
+    /* ===== Colors ===== */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .swatch {
+      background: var(--background-colorBgContainer);
+      border: 1px solid var(--border-colorBorder);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .swatch .chip { height: 88px; }
+    .swatch .meta { padding: 12px 14px; }
+    .swatch .name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .swatch .hex { font-size: 12px; color: #6b6b6b; font-family: ui-monospace, monospace; }
+    .service-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #eef3ff;
+      color: var(--primary-baropharm-colorPrimary);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ===== Components ===== */
+    .components-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .component-card {
+      background: var(--background-colorBgContainer);
+      border: 1px solid var(--border-colorBorder);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .component-card .title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    .component-card .desc {
+      font-size: 13px;
+      color: #6b6b6b;
+      margin-bottom: 16px;
+    }
+
+    /* CTA Button */
+    .cta-button {
+      width: 100%;
+      background: var(--primary-baropharm-colorPrimary);
+      color: var(--text-colorTextLight);
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      cursor: pointer;
+    }
+    .cta-wrap {
+      padding: 16px;
+      background: #fafafa;
+      border-radius: 8px;
+    }
+
+    /* Select items */
+    .select-list { display: flex; flex-direction: column; }
+    .select-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 48px;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 24px;
+    }
+    .select-item.default { color: var(--text-colorText); font-weight: 400; }
+    .select-item.selected { color: var(--primary-baropharm-colorPrimary); font-weight: 600; }
+    .select-item .item-text { flex: 1 0 0; min-width: 0; }
+    .check-icon {
+      width: 24px; height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-baropharm-colorPrimary);
+    }
+
+    /* BottomSheet mock */
+    .device-frame {
+      width: 375px;
+      max-width: 100%;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.04);
+      border-radius: 24px;
+      padding: 12px;
+    }
+    .bottom-sheet {
+      background: var(--background-colorBgContainer);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .sheet-header {
+      display: flex;
+      justify-content: center;
+      padding: 16px 16px 0;
+    }
+    .drag-handle {
+      width: 32px; height: 4px;
+      background: var(--fill-colorFill);
+      border-radius: 100px;
+    }
+    .sheet-title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+    }
+    .sheet-title {
+      flex: 1 0 0;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      color: var(--text-colorText);
+    }
+    .close-btn {
+      width: 24px; height: 24px;
+      background: none; border: 0; cursor: pointer;
+      color: var(--text-colorText);
+    }
+    .sheet-body { padding: 0 16px; }
+    .sheet-footer { padding: 16px; }
+    .home-indicator {
+      display: flex; justify-content: center;
+      padding: 20px 0 8px;
+    }
+    .home-indicator span {
+      width: 134px; height: 5px;
+      background: #1f1f1f; border-radius: 100px;
+    }
+
+    /* ===== Pages overview ===== */
+    .pages-note {
+      background: var(--background-colorBgContainer);
+      border: 1px dashed var(--border-colorBorder);
+      border-radius: 12px;
+      padding: 20px 24px;
+      color: #6b6b6b;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    .pages-note code {
+      background: #f0f1f3;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="page-title">Baropharm Design System</h1>
+  <p class="page-sub">현재까지 메모리에 저장된 토큰·컴포넌트 기반 미리보기 (Figma fileKey: 8JV1QkzSuEpZEMtLiLQYYv)</p>
+
+  <!-- Typography -->
+  <section>
+    <h2>Typography — Pretendard</h2>
+    <div class="type-grid">
+      <div class="row">
+        <span class="label">H2</span>
+        <span class="h2">제목 텍스트 Title</span>
+        <span class="spec">SemiBold · 20 / 28</span>
+      </div>
+      <div class="row">
+        <span class="label">H4</span>
+        <span class="h4">서브 제목 Subtitle</span>
+        <span class="spec">SemiBold · 16 / 24</span>
+      </div>
+      <div class="row">
+        <span class="label">B2</span>
+        <span class="b2">본문 텍스트 Body</span>
+        <span class="spec">Regular · 16 / 24</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Colors -->
+  <section>
+    <h2>Colors</h2>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="chip" style="background:#4e84ff"></div>
+        <div class="meta">
+          <div class="name">Primary / colorPrimary <span class="service-tag">Baropharm</span></div>
+          <div class="hex">#4e84ff</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#ffffff;border-bottom:1px solid var(--border-colorBorder)"></div>
+        <div class="meta">
+          <div class="name">Background / colorBgContainer</div>
+          <div class="hex">#ffffff</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#1f1f1f"></div>
+        <div class="meta">
+          <div class="name">Text / colorText</div>
+          <div class="hex">#1f1f1f</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#ffffff;border-bottom:1px solid var(--border-colorBorder)"></div>
+        <div class="meta">
+          <div class="name">Text / colorTextLight</div>
+          <div class="hex">#ffffff</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#ebebeb"></div>
+        <div class="meta">
+          <div class="name">Fill / colorFill</div>
+          <div class="hex">#ebebeb</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#dbdbdb"></div>
+        <div class="meta">
+          <div class="name">Border / colorBorder</div>
+          <div class="hex">#dbdbdb</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Components -->
+  <section>
+    <h2>Components</h2>
+    <div class="components-row">
+
+      <div class="component-card">
+        <div class="title">CTA-BottomButtonGroup</div>
+        <div class="desc">페이지 하단에 상시 노출. 가장 중요한 액션에만 사용.</div>
+        <div class="cta-wrap">
+          <button class="cta-button">Button</button>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="title">Select-items</div>
+        <div class="desc">Default / Selected 상태. 선택 시 Primary 컬러 + SemiBold + 체크 아이콘.</div>
+        <div class="select-list">
+          <div class="select-item default"><span class="item-text">items</span></div>
+          <div class="select-item selected">
+            <span class="item-text">items</span>
+            <span class="check-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </div>
+          <div class="select-item default"><span class="item-text">items</span></div>
+        </div>
+      </div>
+
+      <div class="component-card" style="grid-column: 1 / -1;">
+        <div class="title">BottomSheet</div>
+        <div class="desc">화면 하단을 기준으로 나타나는 UI. SheetHeader + Title + List + CTA + Home indicator 구성.</div>
+        <div class="device-frame">
+          <div class="bottom-sheet">
+            <div class="sheet-header"><div class="drag-handle"></div></div>
+            <div class="sheet-title-row">
+              <div class="sheet-title">Title</div>
+              <button class="close-btn" aria-label="close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <div class="sheet-body">
+              <div class="select-list">
+                <div class="select-item default"><span class="item-text">items</span></div>
+                <div class="select-item selected">
+                  <span class="item-text">items</span>
+                  <span class="check-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                </div>
+                <div class="select-item default"><span class="item-text">items</span></div>
+                <div class="select-item default"><span class="item-text">items</span></div>
+                <div class="select-item default"><span class="item-text">items</span></div>
+                <div class="select-item default"><span class="item-text">items</span></div>
+                <div class="select-item default"><span class="item-text">items</span></div>
+                <div class="select-item default"><span class="item-text">items</span></div>
+              </div>
+            </div>
+            <div class="sheet-footer">
+              <button class="cta-button">Button</button>
+            </div>
+            <div class="home-indicator"><span></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pages info -->
+  <section>
+    <h2>Pages / Services (정리 필요)</h2>
+    <div class="pages-note">
+      현재 메모리에는 <code>Baropharm</code> 서비스 컬러(<code>#4e84ff</code>)만 등록되어 있습니다.<br/>
+      네이밍 컨벤션은 <code>Primary/{ServiceName}/colorPrimary</code> 패턴.<br/>
+      다른 서비스(예: 다른 브랜드 컬러)나 페이지별 컴포넌트 목록을 추가 등록하려면 해당 Figma 노드 링크를 알려주세요.
+    </div>
+  </section>
+</body>
+</html>
